@@ -1,3 +1,10 @@
-console.log("Hello Devika");
-var state = new Array("Delhi", "Mumbai", "Bangalore");
-console.log(state);
+const orange = document.querySelector('.orange');
+
+const getBGColor = (selectedElement) => {
+    return window.getComputedStyle(selectedElement).backgroundColor;
+};
+
+var orangeELementColor = getBGColor(orange);
+orange.addEventListener('mouseenter' , () => {
+    orange.style.backgroundColor = 'lightgray';
+});
