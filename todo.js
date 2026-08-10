@@ -1,6 +1,9 @@
 let add = document.getElementById("add");
 let taskInput = document.getElementById("taskInput");
 let clear = document.getElementById("clear");
+let taskCount = 0;
+let counter = document.getElementById("counter");
+
 
 
 add.addEventListener("click", function(){
@@ -8,10 +11,18 @@ add.addEventListener("click", function(){
     if(task !== ""){
         let li = document.createElement("li");
         li.innerHTML = task;
+        taskCount++;
+        counter.innerText = `Tasks Remaining: ${taskCount}`;
 
 
         li.addEventListener("click", function(){
             li.classList.toggle("completed");
+            if(li.classList.contains("completed")){
+                taskCount--;
+            } else {
+                taskCount++;
+            }
+            counter.innerText = `Tasks Remaining: ${taskCount}`;
         });
 
         let deleteButton = document.createElement("button");
@@ -19,6 +30,10 @@ add.addEventListener("click", function(){
 
         deleteButton.addEventListener("click", function(event){
              event.stopPropagation();
+
+             if(!li.classList.contains("completed")){
+                taskCount--;
+             }
              li.remove();
         });
         li.appendChild(deleteButton);
@@ -33,5 +48,9 @@ clear.addEventListener("click", function(){
     while(list.firstChild){
         list.removeChild(list.firstChild);
     }
+    taskCount = 0;
+    counter.innerText = `Tasks remaining: ${taskCount}`;
 });
+
+
 
